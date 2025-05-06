@@ -1,73 +1,31 @@
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * @author usp
- */
 public class Main {
-// Main.java
-    public static void main(String[] args) {
-        // Criando a árvore e inserindo valores
-        Inserir insercao = new Inserir() {
-            @Override
-            public boolean Busca(int valor) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+	public static void main(String[] args) throws IOException {
+
+        String line;
+        
+        AVLTree tree = new AVLTree(); // Inicializando a árvore AVL
+
+        // Processar as entradas
+        while (!(line = EntradaTeclado.leString()).isEmpty()) {
+            String[] parts = line.split(" ");
+            String op = parts[0]; // 'i' ou 'd'
+            String val = parts[1];   // Valor associado
+
+            if (op.equals("i")) {
+                tree.insert(val); // Inserir na árvore AVL
+            } else if (op.equals("d")) {
+                // Deletar da árvore AVL
+            } else {
+                System.out.println("Operação desconhecida: " + op);
             }
+        }
 
-            @Override
-            public void Deletar(int valor) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-        };
-        insercao.Inserir(50);
-        insercao.Inserir(30);
-        insercao.Inserir(20);
-        insercao.Inserir(40);
-        insercao.Inserir(70);
-        insercao.Inserir(60);
-        insercao.Inserir(80);
-
-        // Criando instâncias das classes de busca, deleção e percurso
-        Busca busca = new Busca(insercao.getRaiz()) {
-            @Override
-            public void Inserir(int valor) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public boolean Busca(int valor) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public void Deletar(int valor) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-        };
-        Deletar delecao = new Deletar(insercao.getRaiz()) {
-            @Override
-            public void Inserir(int valor) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public boolean Busca(int valor) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-            @Override
-            public void Deletar(int valor) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-        };
-
-        // Exibindo a árvore em ordem
-        System.out.println("Árvore em ordem:");
-
-        // Testando busca
-        System.out.println("\nBusca por 40: " + busca.Busca(40)); // true
-        System.out.println("Busca por 100: " + busca.Busca(100)); // false
-
-        // Deletando um valor e mostrando a árvore novamente
-        delecao.deletar(20);
-        System.out.println("\nÁrvore após deletar 20:");
+        // Imprimir a representação da árvore no formato DOT
+        System.out.println("Representação da árvore AVL:");
+        System.out.println(tree.toString());
     }
 }

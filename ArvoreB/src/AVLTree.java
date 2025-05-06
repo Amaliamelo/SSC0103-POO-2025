@@ -1,5 +1,9 @@
 public class AVLTree extends BTree {
-    public AVLTree(String[] heapVector) {
+	   public AVLTree() {
+	        super(new String[0]); // Inicializa a árvore com um vetor vazio
+	    }
+	
+	public AVLTree(String[] heapVector) {
         super(new String[0]);
         for (String val : heapVector) {
             if (val != null) {

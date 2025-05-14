@@ -1,17 +1,19 @@
+import java.util.*;
+
 public class AVLTree extends BTree {
-	   public AVLTree() {
-	        super(new String[0]); // Inicializa a árvore com um vetor vazio
-	    }
-	
-	public AVLTree(String[] heapVector) {
-        super(new String[0]);
+    public List<String> heapVector;
+
+    public AVLTree(List<String> heapVector) {
+        super(new ArrayList<>()); // constrói a base sem nada
+        this.heapVector = heapVector;
+
         for (String val : heapVector) {
             if (val != null) {
                 insert(val);
             }
         }
     }
-
+    @Override
     public void insert(String value) {
         if (root == null) {
             root = new Node(value);
@@ -19,4 +21,11 @@ public class AVLTree extends BTree {
             root.insert(value);
         }
     }
+@Override	
+    public void delete(String value) {
+        if (root != null) {
+            root = root.delete(value);
+        }
+    }
+    
 }

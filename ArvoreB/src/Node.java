@@ -20,13 +20,13 @@ public class Node {
     }
 
     public void insert(String value) {
-        if (value.compareTo(data) <= 0) {
+        if (value.compareTo(data) < 0) {
             if (left == null) {
                 left = new Node(value);
             } else {
                 left.insert(value);
             }
-        } else {
+        } else if (value.compareTo(data) > 0) {
             if (right == null) {
                 right = new Node(value);
             } else {
@@ -38,23 +38,26 @@ public class Node {
 
     private void rotateLeft() {
         Node newRoot = right;
-        Node temp = new Node(data);
-        temp.left = left;
-        temp.right = newRoot.left;
+        Node oldLeft = left;
+        String oldData = data;
 
+        // Atualiza dados e filhos
         data = newRoot.data;
-        left = temp;
+        left = new Node(oldData);
+        left.left = oldLeft;
+        left.right = newRoot.left;
         right = newRoot.right;
     }
 
     private void rotateRight() {
         Node newRoot = left;
-        Node temp = new Node(data);
-        temp.right = right;
-        temp.left = newRoot.right;
+        Node oldRight = right;
+        String oldData = data;
 
         data = newRoot.data;
-        right = temp;
+        right = new Node(oldData);
+        right.right = oldRight;
+        right.left = newRoot.right;
         left = newRoot.left;
     }
 
@@ -87,5 +90,32 @@ public class Node {
                 rotateLeft();
             }
         }
+    }
+
+    private Node findMin() {
+        return (left == null) ? this : left.findMin();
+    }
+
+    public Node delete(String value) {
+        if (value.compareTo(data) < 0) {
+            if (left != null) {
+                left = left.delete(value);
+            }
+        } else if (value.compareTo(data) > 0) {
+            if (right != null) {
+                right = right.delete(value);
+            }
+        } else {
+            // Nó encontrado
+            if (left == null) return right;
+            if (right == null) return left;
+
+            Node successor = right.findMin();
+            this.data = successor.data;
+            right = right.delete(successor.data);
+        }
+
+        rebalance();
+        return this;
     }
 }

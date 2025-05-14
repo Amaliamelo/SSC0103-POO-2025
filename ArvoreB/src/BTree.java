@@ -3,15 +3,15 @@ import java.util.*;
 public class BTree {
     protected Node root;
 
-    public BTree(String[] heapVector) {
+    public BTree(List<String> heapVector) {
         this.root = buildFromHeap(heapVector, 0);
     }
 
-    private Node buildFromHeap(String[] vec, int index) {
-        if (index >= vec.length || vec[index] == null) {
+    private Node buildFromHeap(List<String> vec, int index) {
+        if (index >= vec.size() || vec.get(index) == null) {
             return null;
         }
-        Node node = new Node(vec[index]);
+        Node node = new Node(vec.get(index));
         node.left = buildFromHeap(vec, 2 * index + 1);
         node.right = buildFromHeap(vec, 2 * index + 2);
         return node;
@@ -45,6 +45,7 @@ public class BTree {
 
     public String toString() {
         if (root == null) return "digraph {\n}";
+        if (root.right == null && root.left == null) return String.format("digraph {\n\"0 %s\" }", root.data);
 
         StringBuilder sb = new StringBuilder("digraph {\n");
         Queue<Pair> queue = new LinkedList<>();
@@ -57,12 +58,12 @@ public class BTree {
 
             if (node.left != null) {
                 int leftIndex = 2 * index + 1;
-                sb.append(String.format("\"%d %s\" -> \"%d %s\"\n", index, node.data, leftIndex, node.left.data));
+                sb.append(String.format("\"%d %s\" ->\"%d %s\"\n", index, node.data, leftIndex, node.left.data));
                 queue.add(new Pair(node.left, leftIndex));
             }
             if (node.right != null) {
                 int rightIndex = 2 * index + 2;
-                sb.append(String.format("\"%d %s\" -> \"%d %s\"\n", index, node.data, rightIndex, node.right.data));
+                sb.append(String.format("\"%d %s\" ->\"%d %s\"\n", index, node.data, rightIndex, node.right.data));
                 queue.add(new Pair(node.right, rightIndex));
             }
         }
@@ -71,13 +72,25 @@ public class BTree {
         return sb.toString();
     }
 
-    private static class Pair {
+    protected static class Pair {
         Node node;
         int index;
 
         Pair(Node node, int index) {
             this.node = node;
             this.index = index;
+        }
+    }
+    public void insert(String value) {
+        if (root == null) {
+            root = new Node(value);
+        } else {
+            root.insert(value);
+        }
+    }
+    public void delete(String value) {
+        if (root != null) {
+            root = root.delete(value);
         }
     }
 }

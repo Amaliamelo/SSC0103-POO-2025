@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package loja.exercicioherança.polimorfismo;
+
 
 /**
  *
@@ -11,21 +11,12 @@ package loja.exercicioherança.polimorfismo;
 public class Livro extends Produto{
     private String titulo;
     private String primeiroAutor;
-    private String editora;
     private int ano;
-    private int edicao;
-    private int paginas;
-    private String idioma;
-    
     public Livro(String codigoBarras,int quantidade, String titulo, String primeiroAutor, String Editora, int Ano, int Edicao, int paginas, String idioma){
         super(codigoBarras, quantidade);
         this.titulo = titulo;
         this.primeiroAutor = primeiroAutor;
-        this.editora = Editora;
         this.ano = Ano;
-        this.edicao = Edicao;
-        this.paginas = paginas;
-        this.idioma = idioma;
 
     }
     @Override

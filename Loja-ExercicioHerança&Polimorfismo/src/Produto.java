@@ -1,4 +1,4 @@
-package loja.exercicioherança.polimorfismo;
+
 
 /**
  *
@@ -9,8 +9,9 @@ public abstract class Produto {
     private int quantidade;
     
     
-    public Produto(String codigoBarras){
+    public Produto(String codigoBarras, int quantidade){
         this.codigoBarras = codigoBarras;
+        this.quantidade = quantidade;
     }
     
     public String getCodigoBarras() {

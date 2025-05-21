@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-package loja.exercicioherança.polimorfismo;
+
 import java.util.ArrayList;
 
 /**
@@ -20,34 +20,42 @@ public class Loja {
     public void inserirProduto(String[] entrada) {
     try {
         String tipo = entrada[1];
+        String codigoBarras = entrada[2];
 
-        Produto produto = null;
         if (tipo.equalsIgnoreCase("Livro")) {
-            produto = Livro.fromString(entrada);
         } else if (tipo.equalsIgnoreCase("CD")) {
-            produto = CD.fromString(entrada);
         } else if (tipo.equalsIgnoreCase("DVD")) {
-            produto = DVD.fromString(entrada);
         } else {
             System.out.println("Tipo de produto não reconhecido: " + tipo);
             return;
         }
 
-        adicionarProduto(produto);
+        adicionarProduto(entrada);
+        System.out.println("Operação inserir " + tipo.toLowerCase() + ": " + codigoBarras);
+        System.out.println("Operação realizada com sucesso");
+   
     } catch (Exception e) {
         System.out.println("Erro ao processar entrada: " + e.getMessage());
     }
 }
-    public void adicionarProduto(Produto novoProduto) {
-        for (Produto produto : produtos) {
-            if (produto.getCodigoBarras().equals(novoProduto.getCodigoBarras())) {
-                produto.adicionarQuantidade(novoProduto.getQuantidade());
-                System.out.println("Quantidade adicionada ao produto existente: " + produto.getDescricao());
-                return;
+    public void adicionarProduto(String[] parts) {
+        try {
+            String codigoBarras = parts[1];
+            int quantidade = Integer.parseInt(parts[2]);
+
+            for (Produto produto : produtos) {
+                if (produto.getCodigoBarras().equals(codigoBarras)) {
+                    produto.adicionarQuantidade(quantidade);
+                    System.out.println("Operação de compra: " + codigoBarras);
+                    System.out.println("Operação realizada com sucesso: " + codigoBarras);
+                            return;
+                }
             }
+
+            System.out.println("Produto com código de barras " + codigoBarras + " não encontrado para adicionar quantidade.");
+        } catch (Exception e) {
+            System.out.println("Erro ao processar adição de produto: " + e.getMessage());
         }
-        produtos.add(novoProduto);
-        System.out.println("Novo produto adicionado: " + novoProduto.getDescricao());
     }
     
     public void venderProduto(String[] entrada) {
@@ -67,29 +75,36 @@ public class Loja {
         for (Produto produto : produtos) {
             if (produto.getCodigoBarras().equals(codigoBarras)) {
                 if (produto.venderQuantidade(quantidade)) {
-                    System.out.println("Venda realizada: " + quantidade + " unidade(s) de " + produto.getDescricao());
-                    return true;
+                	 System.out.println("Operação de venda: " + codigoBarras);
+                     System.out.println("Operação realizada com sucesso: " + codigoBarras);
+                               return true;
                 } else {
-                    System.out.println("Estoque insuficiente para realizar a venda.");
-                    return false;
+                	System.out.println("Operação de venda: " + codigoBarras);
+                    System.out.println("***Erro: Estoque insuficiente: " + codigoBarras + " Quantidade: " + quantidade);
+                             return false;
                 }
             }
         }
-        System.out.println("Produto não encontrado.");
+        System.out.println("Operação de venda: " + codigoBarras);
+        System.out.println("***Erro: Código inexistente: " + codigoBarras);
         return false;
     }
 
     public void procurarProdutoPorCodigo(String[] entrada) {
         try {
             String codigoBarras = entrada[1];
+            System.out.println("Procurando: " + codigoBarras);
+
             Produto produto = procurarProdutoPorCodigo(codigoBarras);
             if (produto != null) {
-                System.out.println("Produto encontrado: " + produto.getDescricao());
+                System.out.println("Encontrado:\n" + produto.getDescricao());
             } else {
                 System.out.println("Produto não encontrado.");
             }
         } catch (Exception e) {
-            System.out.println("Erro ao processar procura por código: " + e.getMessage());
+            String codigoBarras = entrada[1];
+
+            System.out.println("Produto não encontrado: " + codigoBarras);
         }
     }
     public Produto procurarProdutoPorCodigo(String codigoBarras) {

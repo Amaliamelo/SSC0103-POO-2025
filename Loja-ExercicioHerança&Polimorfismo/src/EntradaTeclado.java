@@ -31,6 +31,7 @@ public class EntradaTeclado {
 	 * string a partir do teclado. 
 	 */
 	public static String leString() throws IOException {
+		
 		String x;
 		x = br.readLine();
 		return x;

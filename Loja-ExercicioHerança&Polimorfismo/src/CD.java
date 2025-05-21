@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package loja.exercicioherança.polimorfismo;
+
 
 /**
  *
@@ -11,16 +11,12 @@ package loja.exercicioherança.polimorfismo;
 public class CD extends Produto{
     private String tituloAlbum;
     private String banda;
-    private int trilhas;
-    private String gravadora;
     private int ano;
     
     public CD(String codigoBarras, int quantidade, String tituloAlbum, String banda, int trilhas, String gravadora, int ano){
         super(codigoBarras, quantidade);
         this.tituloAlbum = tituloAlbum;
         this.banda = banda;
-        this.trilhas = trilhas;
-        this.gravadora = gravadora;
         this.ano = ano;
     }
     @Override

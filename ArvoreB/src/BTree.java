@@ -45,11 +45,11 @@ public class BTree {
 
     public String toString() {
         if (root == null) return "digraph {\n}";
-        if (root.right == null && root.left == null) return String.format("digraph {\n \"0 %s\" }", root.data);
+        if (root.right == null && root.left == null) return String.format("digraph {\n\"0 %s\" }", root.data);
 
         StringBuilder sb = new StringBuilder("digraph {\n");
         Queue<Pair> queue = new LinkedList<>();
-        queue.add(new Pair(root, 0));i
+        queue.add(new Pair(root, 0));
 
         while (!queue.isEmpty()) {
             Pair current = queue.poll();
@@ -58,16 +58,15 @@ public class BTree {
 
             if (node.left != null) {
                 int leftIndex = 2 * index + 1;
-                sb.append(String.format("\"%d %s\" -> \"%d %s\"\n", index, node.data, leftIndex, node.left.data));
+                sb.append(String.format("\"%d %s\" ->\"%d %s\"\n", index, node.data, leftIndex, node.left.data));
                 queue.add(new Pair(node.left, leftIndex));
             }
             if (node.right != null) {
-                int rightIndex = 2 * index + 2;
-                sb.append(String.format("\"%d %s\" -> \"%d %s\"\n", index, node.data, rightIndex, node.right.data));
                 queue.add(new Pair(node.right, rightIndex));
-            }
             return sb.toString();
-        }
+                sb.append(String.format("\"%d %s\" ->\"%d %s\"\n", index, node.data, rightIndex, node.right.data));
+                queue.add(new Pair(node.right, rightIndex));
+            }        }
 
         sb.append("}");
         return sb.toString();
@@ -82,4 +81,14 @@ public class BTree {
             this.index = index;
         }
     }
+    public void insert(String value) {
+        if (root == null) {
+            root = new Node(value);
+        } else {
+            root.insert(value);
+        }
+    }
+    public void delete(String value) {
+        if (root != null) {
+            root = root.delete(value);
 }

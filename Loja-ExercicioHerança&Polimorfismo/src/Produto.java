@@ -1,4 +1,4 @@
-package loja.exercicioherança.polimorfismo;
+
 
 /**
  *
@@ -9,8 +9,9 @@ public abstract class Produto {
     private int quantidade;
     
     
-    public Produto(String codigoBarras){
+    public Produto(String codigoBarras, int quantidade){
         this.codigoBarras = codigoBarras;
+        this.quantidade = quantidade;
     }
     
     public String getCodigoBarras() {
@@ -29,12 +30,21 @@ public abstract class Produto {
     }
 
     public boolean venderQuantidade(int quantidade) {
-        if (this.quantidade >= quantidade) {
+
+        if (this.quantidade >= quantidade && this.quantidade > 1) {
+
             this.quantidade -= quantidade;
             return true;
         }
         return false;
     }
+    
+    public boolean isEsgotado() {
+        return this.quantidade == 0;
+    }
+
 
     public abstract String getDescricao();
+	public abstract String getSumario();
+
 }

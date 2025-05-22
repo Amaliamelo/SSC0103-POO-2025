@@ -34,7 +34,7 @@ public class Main {
             }
         }
         
-        PerfectlyBalancedTree arvoreBalanceada = new PerfectlyBalancedTree(tree);
+        ArvorePerfeitamenteBalanceada arvoreBalanceada = new ArvorePerfeitamenteBalanceada(Btree);
         System.out.println(arvoreBalanceada.toString());
         System.out.println();
 

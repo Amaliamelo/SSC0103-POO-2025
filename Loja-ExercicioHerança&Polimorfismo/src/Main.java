@@ -17,7 +17,7 @@ public class Main {
         Loja loja = new Loja();
 
         while ((line = EntradaTeclado.leString()) != null && !line.trim().isEmpty()) {
-            String[] parts = line.trim().split(",");
+            String[] parts = line.trim().split("\\s+");
             
             String op = parts[0];
 

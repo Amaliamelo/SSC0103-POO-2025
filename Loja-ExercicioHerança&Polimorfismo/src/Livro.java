@@ -10,52 +10,31 @@
  */
 public class Livro extends Produto{
     private String titulo;
-    private String editora;
     private String primeiroAutor;
     private int ano;
-    private int edicao;
-    private int paginas;
-    private String idioma;
-
-    public Livro(String codigoBarras,int quantidade, String titulo, 
-    		String primeiroAutor, String Editora, int Ano, int Edicao, int paginas, String idioma){
+    public Livro(String codigoBarras,int quantidade, String titulo, String primeiroAutor, String Editora, int Ano, int Edicao, int paginas, String idioma){
         super(codigoBarras, quantidade);
         this.titulo = titulo;
         this.primeiroAutor = primeiroAutor;
         this.ano = Ano;
-        this.edicao = Edicao;
-        this.paginas = paginas;
-        this.idioma = idioma;
-        this.editora = Editora;
 
     }
     @Override
     public String getDescricao() {
-        return "Livro \n"
-        		+ "Código: " + getCodigoBarras() + "\n"
-        		+ "Título: " + titulo + "\n"
-        		+ "Autor: " + primeiroAutor + "\n" 
-        		+ "Editora: " + editora + "\n" 
-        		+ "Edição: " + edicao + "\n" + 
-        		"Ano: " + ano +"\n" 
-        		+"Páginas:" + paginas + "\n"
-        		+"Idioma:" + idioma+ "\n";
-        }
+        return "Livro - Título: " + titulo + ", Autor: " + primeiroAutor + ", Ano: " + ano + ", Quantidade: " + getQuantidade();
+    }
     
-    @Override
-    public String getSumario() {
-        return "Livro \n"
-        		+ "Código: " + getCodigoBarras() + "\n"
-        		+ "Título: " + titulo + "\n"
-        		+ "Autor: " + primeiroAutor + "\n" 
-        		+ "Editora: " + editora + "\n" 
-        		+ "Edição: " + edicao + "\n" + 
-        		"Ano: " + ano +"\n" 
-        		+"Páginas:" + paginas + "\n"
-        		+"Idioma:" + idioma + "\n"
-        		+ "Quantidade: "+ getQuantidade() +"\n";
-        }
-    
-    
-    
+     // Método de fábrica para criar um Livro a partir de uma string
+    public static Livro fromString(String[] partes) {
+        String codigo = partes[2];
+        String titulo = partes[3];
+        String primeiroAutor = partes[4];
+        String editora = partes[5];
+        int ano = Integer.parseInt(partes[6]);
+        int edicao = Integer.parseInt(partes[7]);
+        int paginas = Integer.parseInt(partes[8]);
+        String idioma = partes[9];
+
+        return new Livro(codigo, 1, titulo, primeiroAutor, editora, ano, edicao, paginas, idioma);
+    }
 }

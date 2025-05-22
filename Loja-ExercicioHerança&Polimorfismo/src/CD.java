@@ -12,10 +12,6 @@ public class CD extends Produto{
     private String tituloAlbum;
     private String banda;
     private int ano;
-    private int trilhas;
-    private String gravadora;
-   
-
     
     public CD(String codigoBarras, int quantidade, String tituloAlbum, String banda, int trilhas, String gravadora, int ano){
         super(codigoBarras, quantidade);
@@ -26,11 +22,6 @@ public class CD extends Produto{
         this.gravadora = gravadora;
     }
     @Override
-    public String getDescricao() {
-    	return "CD \n"
-        		+ "Código: " + getCodigoBarras() + "\n"
-        		+ "Título: " + tituloAlbum + "\n"
-        		+ "Banda: " + banda + "\n" 
         		+ "Gravadora: " + gravadora + "\n" 
         		+ "Ano: " + ano +"\n" 
         		+ "trilhas:" + trilhas+"\n";

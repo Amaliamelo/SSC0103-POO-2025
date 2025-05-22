@@ -62,11 +62,11 @@ public class BTree {
                 queue.add(new Pair(node.left, leftIndex));
             }
             if (node.right != null) {
-                queue.add(new Pair(node.right, rightIndex));
-            return sb.toString();
+                int rightIndex = 2 * index + 2;
                 sb.append(String.format("\"%d %s\" ->\"%d %s\"\n", index, node.data, rightIndex, node.right.data));
                 queue.add(new Pair(node.right, rightIndex));
-            }        }
+            }
+        }
 
         sb.append("}");
         return sb.toString();
@@ -91,4 +91,6 @@ public class BTree {
     public void delete(String value) {
         if (root != null) {
             root = root.delete(value);
+        }
+    }
 }

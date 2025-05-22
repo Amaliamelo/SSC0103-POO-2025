@@ -22,7 +22,6 @@ public class EntradaTeclado {
 	 * Usado para criar um BufferedReader a partir da entrada padrão;
 	 */
 	static private BufferedReader br = new BufferedReader(isr);
-		
 	/**
 	 * Le um string digitado pelo teclado, até que seja pressionado
 	 * um enter. Ou seja, le a linha toda.
@@ -31,6 +30,7 @@ public class EntradaTeclado {
 	 * string a partir do teclado. 
 	 */
 	public static String leString() throws IOException {
+
 		String x;
 		x = br.readLine();
 		return x;

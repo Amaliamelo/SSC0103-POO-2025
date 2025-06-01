@@ -31,7 +31,7 @@ public abstract class Produto {
 
     public boolean venderQuantidade(int quantidade) {
 
-        if (this.quantidade >= quantidade && this.quantidade > 1) {
+        if (this.quantidade >= quantidade) {
 
             this.quantidade -= quantidade;
             return true;

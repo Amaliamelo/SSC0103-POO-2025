@@ -5,6 +5,5 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="ArvoreB/src"/>
 	<classpathentry kind="output" path="ArvoreB/build/classes"/>
 </classpath>
